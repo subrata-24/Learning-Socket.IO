@@ -6,17 +6,16 @@
     <title>First Socket IO project</title>
 </head>
 <body>
-    <h1>First Socket IO project</h1>
-    <h2 id="myTime"></h2>
+    <input type="text" id="name">
+    <button id="send" onclick="send()">send</button>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-    // The io() comes from the Socket.IO client library, which the server serves at /socket.io/socket.io.js.
-    // When io() is called in the browser, it connects back to the server's Socket.IO server instance (io on backend).If the name is different then there is no problem.It just connect on backend server.name can be anuthing
         let socket = io();
-
-        socket.on("customeEvent",(msg)=>{
-            document.getElementById("myTime").innerHTML = msg
-        });
+       
+        function send(){
+            const name = document.getElementById("name").value;
+            socket.send(name);
+        }
     </script>
 </body>
 </html>

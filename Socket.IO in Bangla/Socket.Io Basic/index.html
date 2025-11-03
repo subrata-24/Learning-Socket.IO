@@ -6,10 +6,15 @@
     <title>Learn Socket.IO</title>
 </head>
 <body>
+
+    <h1 id="showMsg"></h1>
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
         let socket = io();
+        socket.on("broadcastEvent", (msg)=>{
+            document.getElementById("showMsg").innerHTML = msg;
+        })
     </script>
 </body>
 </html>

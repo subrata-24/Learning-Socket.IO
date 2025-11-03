@@ -1,28 +1,14 @@
+//make http express server
 const express = require("express");
-const path = require("path");
-const http = require("http");
-const { Server } = require("socket.io"); //Server is a class
-
 const app = express();
-const PORT = 3000;
-
-// Create HTTP server with Express app
+const http = require("http");
 const expressServer = http.createServer(app);
+const PORT = 3000;
+const path = require("path");
 
-// Attach Socket.IO to the HTTP server.This can be any name
+//make socket.io server
+const { Server } = require("socket.io");
 const io = new Server(expressServer);
-
-io.on("connection", (socket) => {
-  console.log("New user connected");
-
-  socket.on("message", (msg) => {
-    console.log(msg);
-  });
-
-  socket.on("disconnect", () => {
-    console.log("User disconnected");
-  });
-});
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));

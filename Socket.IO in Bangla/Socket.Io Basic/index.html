@@ -14,7 +14,7 @@
     // When io() is called in the browser, it connects back to the server's Socket.IO server instance (io on backend).If the name is different then there is no problem.It just connect on backend server.name can be anuthing
         let socket = io();
 
-        socket.on("message",(msg)=>{
+        socket.on("customeEvent",(msg)=>{
             document.getElementById("myTime").innerHTML = msg
         });
     </script>

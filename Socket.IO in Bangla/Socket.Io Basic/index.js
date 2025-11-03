@@ -14,18 +14,11 @@ const io = new Server(expressServer);
 
 io.on("connection", (socket) => {
   console.log("New user connected");
-  // When a client connects to the server using Socket.IO, the socket object represents that specific client’s connection. So, any work or communication related to that particular client happens through this socket object.on,emit,login
 
-  //   setTimeout(() => {
-  //     //Through a message to client after ten second
-  //     socket.send("Hello Subrata(server-->client)");
-  //   }, 2000);
-
-  //Send time after every ten second
   setInterval(() => {
     const d = new Date();
     const t = d.getTime();
-    socket.send(t);
+    socket.emit("customeEvent", t);
   }, 10);
 
   socket.on("disconnect", () => {

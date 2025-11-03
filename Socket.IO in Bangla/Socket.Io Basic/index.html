@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Socket IO project</title>
+</head>
+<body>
+    <h1>First Socket IO project</h1>
+    <h2 id="myTime"></h2>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    // The io() comes from the Socket.IO client library, which the server serves at /socket.io/socket.io.js.
+    // When io() is called in the browser, it connects back to the server's Socket.IO server instance (io on backend).If the name is different then there is no problem.It just connect on backend server.name can be anuthing
+        let socket = io();
+
+        socket.on("message",(msg)=>{
+            document.getElementById("myTime").innerHTML = msg
+        });
+    </script>
+</body>
+</html>

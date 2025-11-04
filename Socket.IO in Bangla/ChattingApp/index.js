@@ -15,7 +15,9 @@ app.get("/", (req, res) => {
 });
 
 socketServer.on("connection", (socket) => {
-  console.log("User is connected");
+  socket.on("chat", (msg) => {
+    socket.emit("msg_transfer", msg);
+  });
 });
 
 expressServer.listen(PORT, () => {

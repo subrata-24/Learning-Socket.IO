@@ -20,8 +20,12 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
   //create kitchen room under default/main namespace
   socket.join("kitchen-room");
+  //Find how many users is in a room
+  let kitchenRoomUserNumber = io.sockets.adapter.rooms.get("kitchen-room").size;
   //Divide one room in many part
-  io.sockets.in("kitchen-room").emit("cooking", "I am cooking food"); //TO connect on kitchen room the client must use the custom event name
+  io.sockets
+    .in("kitchen-room")
+    .emit("cooking", "I am cooking food " + kitchenRoomUserNumber); //TO connect on kitchen room the client must use the custom event name
   io.sockets.in("kitchen-room").emit("boiling", "I am boiling water");
 
   //create bed room under default/main namespace

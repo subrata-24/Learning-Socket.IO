@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 socketServer.on("connection", (socket) => {
-  socket.send("Hello Subrata");
+  console.log("User is connected");
 });
 
 expressServer.listen(PORT, () => {

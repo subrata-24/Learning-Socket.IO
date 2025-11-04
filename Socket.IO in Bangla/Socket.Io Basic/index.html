@@ -12,28 +12,10 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
-        /*
-          By default, io() would connect to the main ('/') namespace.
-          Here, we explicitly connect to the '/chat' namespace, as defined on the server.
-
-          Only events/messages from the '/chat' namespace will be received via this socket.
-        */
-        let socket = io("/chat");
-
-        // Listen for the custom event sent by the server on '/chat' namespace
-        socket.on("customEvent", (msg) => {
+        let socket = io();
+        socket.on("boiling", (msg) => {
             document.getElementById("showMsg").innerHTML = msg;
         });
-
-        /*
-        // --- Example: To connect to '/admin' namespace, uncomment below and comment the above block ---
-
-        // Connect to the '/admin' namespace (different logical channel)
-        // let socket = io("/admin");
-        // socket.on("customEvent", (msg) => {
-        //     document.getElementById("showMsg").innerHTML = msg;
-        // });
-        */
     </script>
 </body>
 

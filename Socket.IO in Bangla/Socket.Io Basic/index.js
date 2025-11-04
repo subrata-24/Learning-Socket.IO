@@ -17,31 +17,19 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-/*
-  Create and configure custom namespaces:
-  - A namespace is a separate communication "channel" under the same Socket.IO server.
-  - Clients must explicitly connect to a namespace to exchange events/messages through it.
-*/
+io.on("connection", (socket) => {
+  //create kitchen room under default/main namespace
+  socket.join("kitchen-room");
+  //Divide one room in many part
+  io.sockets.in("kitchen-room").emit("cooking", "I am cooking food"); //TO connect on kitchen room the client must use the custom event name
+  io.sockets.in("kitchen-room").emit("boiling", "I am boiling water");
 
-// Create '/chat' namespace
-let chatSocket = io.of("/chat");
-
-// Handle connections to '/chat' namespace
-chatSocket.on("connection", (socket) => {
-  // Emit 'customEvent' to ALL clients connected to /chat namespace
-  chatSocket.emit("customEvent", "Lets start chatting");
+  //create bed room under default/main namespace
+  socket.join("bed-room");
+  io.sockets.in("bed-room").emit("sleeping", "I am sleeping");
+  io.sockets.in("bed-room").emit("rest", "I am taking rest");
 });
 
-// Create '/admin' namespace
-let adminSocket = io.of("/admin");
-
-// Handle connections to '/admin' namespace
-adminSocket.on("connection", (socket) => {
-  // Emit 'customEvent' to ALL clients connected to /admin namespace
-  adminSocket.emit("customEvent", "I am only for admin panel");
-});
-
-// Start the HTTP server
 expressServer.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });

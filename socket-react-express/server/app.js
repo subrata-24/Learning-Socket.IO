@@ -24,6 +24,10 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
   console.log("User is connected");
   console.log("Socket ID", socket.id);
+  socket.broadcast.emit(
+    "message",
+    `Send message to all user except itself ${socket.id}`
+  );
 });
 
 server.listen(PORT, () => {
